@@ -31,3 +31,18 @@ body {
     text-wrap: balance;
   }
 }
+
+.dice {
+  width: 100px; /* Adjust width and height as desired */
+  height: 100px;
+  font-size: 48px; /* Adjust font size for larger dice faces */
+  text-align: center; /* Center the dice faces */
+}
+
+#num-dice {
+  /* Your styles here */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 16px;
+}

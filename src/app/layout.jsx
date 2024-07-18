@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           <nav className="flex justify-center w-100 bg-blue-300">
                      
             <Link
-              className="m-1 text-white hover:text-pink-500"
+              className="m-1 text-white hover:text-purple-500"
               href="/"
             >
               Home
