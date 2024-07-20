@@ -21,7 +21,13 @@ export default function RootLayout({ children }) {
               className="m-1 text-white hover:text-purple-500"
               href="/Home">
               Home
-            </Link>   
+            </Link>
+            
+            <Link 
+            className="m-1 text-pink-500 hover:text-white" href="/Dice">
+             Dice
+           </Link>
+            
                 
           </nav>
         </header>
