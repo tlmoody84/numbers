@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Dice(props) {
   const diceFaces = {
@@ -37,13 +37,6 @@ export default function Home() {
     setShowRules(!showRules);
   };
 
-  const handleArrowClick = (direction) => {
-    if (direction === "up") {
-      setNumDice((prevNumDice) => Math.min(prevNumDice + 1, 8)); // Limit max to 8
-    } else if (direction === "down") {
-      setNumDice((prevNumDice) => Math.max(prevNumDice - 1, 1)); // Limit min to 1
-    }
-  };
 
   return (
     <div className="container mx-auto px-12 py-12 min-h-screen bg-black">

@@ -1,76 +1,84 @@
-import React, { useState } from "react";
-import firebase from "./firebaseConfig"; // Import your Firebase configuration
-import { signOut } from "firebase/auth";
+import { useState } from "react";
+import { login } from "../utils/authUtils";
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null); 
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const userCredential = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
-      console.log("User logged in:", userCredential.user);
-      // Handle successful login (e.g., redirect to another page)
+      const response = await login(email, password);
+      console.log("Login successful!", response);
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage(error.message); // Display error message to user
+      setErrorMessage(error.message || "Login failed. Please try again."); // Set error message
     }
   };
-
-  const handleLogout = async () => {
-    try {
-      await signOut(firebase.auth());
-      console.log("User logged out successfully");
-      // Handle successful logout (e.g., clear user data, redirect)
-    } catch (error) {
-      console.error("Logout error:", error);
-      // Handle logout error (optional)
-    }
-  };
-  return (
-    <form onSubmit={handleLogin}>
-      {/* ... your existing form elements ... */}
-      <button type="button" className="btn btn-danger" onClick={handleLogout}>
-        Logout
-      </button>
-    </form>
-  );
+    // console.log("Email:", email);
+    // console.log("Password:", password);
+    // await login(email, password);
+ 
 
   return (
-    <form onSubmit={handleLogin}>
-      <div className="form-group">
-        <label htmlFor="email">Email Address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <div className="flex items-center justify-center min-h-screen bg-emerald-50">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-lg">
+        <h2 className="text-2xl font-bold text-center text-emerald-600">
+          Login
+        </h2>
+        <form id="login-form" onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-emerald-700"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-emerald-700"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <button type="submit" className="btn btn-primary">
-        Login
-      </button>
-    </form>
+    </div>
   );
+;
 };
 
 export default LoginForm;

@@ -1,9 +1,12 @@
 {
     "cSpell.words": [
         "appspot",
+        "authutils",
         "dcac",
         "filz",
         "firebaseapp",
+        "firebaseui",
+        "Firestore",
         "Prmp",
         "tailwindcss"
     ]
